@@ -1,0 +1,167 @@
+4. 0/1 Knapsack Using Dynamic Programming
+
+
+Java Program
+
+import java.util.Scanner;
+
+public class Knapsack01 {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of items: ");
+        int n = sc.nextInt();
+
+        int[] weight = new int[n];
+        int[] profit = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter weight and profit: ");
+
+            weight[i] = sc.nextInt();
+            profit[i] = sc.nextInt();
+        }
+
+        System.out.print("Enter knapsack capacity: ");
+        int W = sc.nextInt();
+
+        int[][] dp = new int[n + 1][W + 1];
+
+        // Dynamic Programming
+        for (int i = 1; i <= n; i++) {
+
+            for (int w = 1; w <= W; w++) {
+
+                if (weight[i - 1] <= w) {
+
+                    dp[i][w] = Math.max(
+                        profit[i - 1] +
+                        dp[i - 1][w - weight[i - 1]],
+
+                        dp[i - 1][w]
+                    );
+
+                } else {
+
+                    dp[i][w] = dp[i - 1][w];
+                }
+            }
+        }
+
+        System.out.println("Maximum Profit = " + dp[n][W]);
+
+        // Display selected items
+        int w = W;
+
+        System.out.println("Selected Items:");
+
+        for (int i = n; i > 0; i--) {
+
+            if (dp[i][w] != dp[i - 1][w]) {
+
+                System.out.println("Item " + i);
+
+                w = w - weight[i - 1];
+            }
+        }
+
+        sc.close();
+    }
+}
+
+
+
+Sample Output
+Enter number of items: 3
+
+Enter weight and profit: 10 60
+Enter weight and profit: 20 100
+Enter weight and profit: 30 120
+
+Enter knapsack capacity: 50
+
+Maximum Profit = 220
+
+Selected Items:
+Item 3
+Item 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Aim
+Write a Java program to solve the 0/1 Knapsack problem using Dynamic Programming.
+Explanation
+The 0/1 Knapsack problem is an optimization problem in which we have a knapsack with limited capacity and a set of items with different weights and profits.
+
+In this problem, each item has only two possibilities:
+- 1: Select the complete item.
+- 0: Do not select the item.
+We cannot select a fraction of an item.
+
+Dynamic Programming: It solves the problem by dividing it into smaller subproblems and storing their results in a table to avoid repeated calculations.
+Formula
+Let:
+- n = Number of items
+- W = Knapsack capacity
+- wt[i] = Weight of item
+- val[i] = Profit of item
+\[
+DP[i][w] =
+\begin{cases}
+DP[i-1][w], & wt[i-1]>w\\
+\max(DP[i-1][w], val[i-1]+DP[i-1][w-wt[i-1]]), & wt[i-1]\leq w
+\end{cases}
+\]
+
+Algorithm
+1. Start.
+2. Read the number of items.
+3. Read weights and profits of items.
+4. Read knapsack capacity W.
+5. Create a DP table of size (n+1) × (W+1).
+6. Initialize the first row and column with zero.
+7. For each item:
+   - If its weight is greater than capacity, exclude it.
+   - Otherwise, find the maximum profit between selecting and not selecting the item.
+8. Store the maximum profit in the DP table.
+9. Display the maximum profit.
+10. Stop.
+
+
+
+Explanation of Output
+Item	Weight	Profit
+1	10	60
+2	20	100
+3	30	120
+
+Knapsack capacity = 50.
+
+The selected items are item 2 and item 3.
+
+Total weight = 20 + 30 = 50.
+
+Total profit = 100 + 120 = 220.
+Time and Space Complexity
+Operation	Complexity
+DP Table Creation	O(n × W)
+Filling DP Table	O(n × W)
+Total Time	O(n × W)
+Space	O(n × W)
+
+Conclusion: Dynamic Programming finds the optimal solution for the 0/1 Knapsack problem by storing the results of smaller subproblems.

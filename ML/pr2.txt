@@ -1,0 +1,102 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import confusion_matrix
+df = pd.read_csv("emails.csv")
+
+print(df.head())
+print(df.shape)
+# Remove email ID column
+df = df.drop("Email No.", axis=1)
+
+# Separate features and target
+X = df.drop("Prediction", axis=1)
+y = df["Prediction"]
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# Normalize features
+scaler = StandardScaler()
+
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+print("Training data:", X_train.shape)
+print("Testing data:", X_test.shape)
+# Create KNN model
+knn = KNeighborsClassifier(n_neighbors=5)
+
+# Train model
+knn.fit(X_train, y_train)
+
+# Predict results
+y_pred_knn = knn.predict(X_test)
+
+# Calculate accuracy
+print("KNN Accuracy:", accuracy_score(y_test, y_pred_knn))
+
+# Classification report
+print(classification_report(y_test, y_pred_knn))
+
+# Confusion matrix
+cm = confusion_matrix(y_test, y_pred_knn)
+
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
+plt.title("KNN Confusion Matrix")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
+# Create SVM model
+svm = SVC(kernel="linear")
+
+# Train model
+svm.fit(X_train, y_train)
+
+# Predict results
+y_pred_svm = svm.predict(X_test)
+
+# Calculate accuracy
+print("SVM Accuracy:", accuracy_score(y_test, y_pred_svm))
+
+# Classification report
+print(classification_report(y_test, y_pred_svm))
+
+# Confusion matrix
+cm = confusion_matrix(y_test, y_pred_svm)
+
+sns.heatmap(cm, annot=True, fmt="d", cmap="Greens")
+plt.title("SVM Confusion Matrix")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
+results = pd.DataFrame({
+    "Algorithm": ["KNN", "SVM"],
+    "Accuracy": [
+        accuracy_score(y_test, y_pred_knn),
+        accuracy_score(y_test, y_pred_svm)
+    ]
+})
+
+print(results)
+
+results.plot(
+    x="Algorithm",
+    y="Accuracy",
+    kind="bar",
+    legend=False,
+    title="KNN vs SVM Accuracy"
+)
+
+plt.ylabel("Accuracy")
+plt.ylim(0, 1)
+plt.show()

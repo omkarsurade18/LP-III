@@ -1,0 +1,119 @@
+1. Fibonacci Series – Recursive and Non-Recursive
+
+Java Program:
+
+import java.util.Scanner;
+
+public class Fibonacci {
+
+    // Non-Recursive Method
+    static void nonRecursive(int n) {
+        int a = 0, b = 1, c;
+
+        System.out.println("Non-Recursive Fibonacci:");
+
+        for (int i = 0; i < n; i++) {
+            System.out.print(a + " ");
+
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        System.out.println();
+    }
+
+    // Recursive Method
+    static int recursive(int n) {
+        if (n == 0)
+            return 0;
+
+        if (n == 1)
+            return 1;
+
+        return recursive(n - 1) + recursive(n - 2);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of terms: ");
+        int n = sc.nextInt();
+
+        nonRecursive(n);
+
+        System.out.println("Recursive Fibonacci:");
+
+        for (int i = 0; i < n; i++) {
+            System.out.print(recursive(i) + " ");
+        }
+
+        sc.close();
+    }
+}
+
+
+
+Sample Output
+Enter number of terms: 7
+
+Non-Recursive Fibonacci:
+0 1 1 2 3 5 8
+
+Recursive Fibonacci:
+0 1 1 2 3 5 8
+
+
+
+
+
+
+
+Aim
+Write a Java program to calculate Fibonacci numbers using recursive and non-recursive methods and analyze their time and space complexity.
+Explanation
+The Fibonacci series is a sequence in which each number is the sum of the previous two numbers.
+
+The series starts with:
+
+0, 1, 1, 2, 3, 5, 8, 13, 21 ...
+
+Formula:
+\[
+F(n)=F(n-1)+F(n-2)
+\]
+
+Where:
+- F(0) = 0
+- F(1) = 1
+1. Non-Recursive Method: Uses a loop to calculate Fibonacci numbers.
+
+2. Recursive Method: A function calls itself to calculate the next Fibonacci number.
+Algorithm
+Non-Recursive Fibonacci:
+1. Start.
+2. Read the number of terms n.
+3. Initialize a = 0 and b = 1.
+4. Print a and b.
+5. Calculate c = a + b.
+6. Update a = b and b = c.
+7. Repeat until n terms are printed.
+8. Stop.
+Recursive Fibonacci:
+1. Start.
+2. Read the number of terms n.
+3. Define a recursive function fib(n).
+4. If n is 0, return 0.
+5. If n is 1, return 1.
+6. Otherwise, return fib(n-1) + fib(n-2).
+7. Print the Fibonacci series.
+8. Stop.
+
+
+
+
+Time and Space Complexity
+Method	Time Complexity	Space Complexity
+Non-Recursive	O(n)	O(1)
+Recursive	O(2ⁿ)	O(n)
+
+Conclusion: The non-recursive method is more efficient because it avoids repeated function calls.

@@ -1,0 +1,32 @@
+def f(x):
+    return (x + 3)**2
+def gradient(x):
+    return 2 * (x + 3)
+
+x = 2
+lr = 0.1
+iterations = 100
+for i in range(iterations):
+    x = x - lr * gradient(x)
+
+
+print("Minimum point x =", round(x, 4))
+print("Minimum value y =", round(f(x), 4))
+'''1. Define the function \(f(x)=(x+3)^2\).
+2. Calculate its derivative (gradient): \(f'(x)=2(x+3)\).
+3. Set the starting point \(x=2\).
+4. Set learning rate to 0.1.
+5. Repeat the following steps for 100 iterations:
+   - Calculate the gradient.
+   - Update x using the gradient descent formula.
+   - Move towards the minimum value.
+6. Print the final value of x and y.
+Gradient Descent Formula
+\[
+x_{new}=x_{old}-\alpha f'(x)
+\]
+
+Where:
+- \(x\) = Current value
+- \(\alpha\) = Learning rate
+- \(f'(x)\) = Gradient (derivative)'''

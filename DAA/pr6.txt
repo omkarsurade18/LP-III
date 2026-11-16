@@ -1,0 +1,260 @@
+6. Quick Sort – Deterministic and Randomized Variants
+
+Java Program
+
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class QuickSort {
+
+    static Random random = new Random();
+
+    // Deterministic Quick Sort
+    static int partition(int arr[], int low, int high,
+                         int[] comparisons) {
+
+        int pivot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+
+            comparisons[0]++;
+
+            if (arr[j] <= pivot) {
+                i++;
+
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
+    }
+
+    static void deterministicQuickSort(int arr[],
+                                        int low, int high,
+                                        int[] comparisons) {
+
+        if (low < high) {
+
+            int pi = partition(arr, low, high, comparisons);
+
+            deterministicQuickSort(arr, low, pi - 1, comparisons);
+
+            deterministicQuickSort(arr, pi + 1, high, comparisons);
+        }
+    }
+
+    // Randomized Partition
+    static int randomPartition(int arr[], int low, int high,
+                               int[] comparisons) {
+
+        int randomIndex = low + random.nextInt(high - low + 1);
+
+        // Swap random pivot with last element
+        int temp = arr[randomIndex];
+        arr[randomIndex] = arr[high];
+        arr[high] = temp;
+
+        return partition(arr, low, high, comparisons);
+    }
+
+    // Randomized Quick Sort
+    static void randomizedQuickSort(int arr[],
+                                    int low, int high,
+                                    int[] comparisons) {
+
+        if (low < high) {
+
+            int pi = randomPartition(arr, low, high, comparisons);
+
+            randomizedQuickSort(arr, low, pi - 1, comparisons);
+
+            randomizedQuickSort(arr, pi + 1, high, comparisons);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+
+        int arr[] = new int[n];
+
+        System.out.println("Enter array elements:");
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int arr1[] = Arrays.copyOf(arr, n);
+        int arr2[] = Arrays.copyOf(arr, n);
+
+        int[] count1 = {0};
+        int[] count2 = {0};
+
+        // Deterministic Quick Sort
+        deterministicQuickSort(arr1, 0, n - 1, count1);
+
+        System.out.println("\nDeterministic Quick Sort:");
+        System.out.println(Arrays.toString(arr1));
+        System.out.println("Comparisons: " + count1[0]);
+
+        // Randomized Quick Sort
+        randomizedQuickSort(arr2, 0, n - 1, count2);
+
+        System.out.println("\nRandomized Quick Sort:");
+        System.out.println(Arrays.toString(arr2));
+        System.out.println("Comparisons: " + count2[0]);
+
+        sc.close();
+    }
+}
+
+
+
+Sample Output
+Enter number of elements: 6
+
+Enter array elements:
+45 12 89 23 56 10
+
+Deterministic Quick Sort:
+[10, 12, 23, 45, 56, 89]
+Comparisons: 9
+
+Randomized Quick Sort:
+[10, 12, 23, 45, 56, 89]
+Comparisons: 8
+
+
+
+
+
+
+
+
+
+
+Aim
+Write a Java program for the analysis of Quick Sort using deterministic and randomized variants.
+Explanation
+Quick Sort is a divide-and-conquer sorting algorithm.
+
+It works by:
+1. Selecting a pivot element.
+2. Partitioning the array into two parts:
+   - Elements smaller than the pivot.
+   - Elements greater than the pivot.
+3. Recursively sorting both parts.
+1. Deterministic Quick Sort
+- Selects a fixed pivot element.
+- In this program, the last element is selected as the pivot.
+- Its performance depends on the input arrangement.
+2. Randomized Quick Sort
+- Selects a random pivot element.
+- Reduces the chances of consistently getting an unbalanced partition.
+- Generally provides better expected performance.
+Algorithm
+Deterministic Quick Sort:
+1. Start.
+2. Select the last element as pivot.
+3. Partition the array around the pivot.
+4. Place the pivot in its correct position.
+5. Recursively sort the left subarray.
+6. Recursively sort the right subarray.
+7. Display the sorted array.
+8. Stop.
+Randomized Quick Sort:
+1. Start.
+2. Select a random element as pivot.
+3. Swap the random pivot with the last element.
+4. Partition the array.
+5. Recursively sort the left and right subarrays.
+6. Display the sorted array.
+7. Stop.
+
+
+Note: The comparison counts are illustrative. Randomized Quick Sort may produce different counts on different executions.
+Time and Space Complexity
+Case	Deterministic Quick Sort	Randomized Quick Sort
+Best Case	O(n log n)	O(n log n)
+Average Case	O(n log n)	O(n log n) expected
+Worst Case	O(n²)	O(n²)
+Average Space	O(log n)	O(log n)
+Worst Space	O(n)	O(n)
+
+Conclusion: Randomized Quick Sort reduces the probability of worst-case partitioning and provides good expected performance for different input arrangements.
+
+Important Correction for Program 5 (N-Queens)
+The first Queen cannot always be fixed at column 0. For example, the 4-Queens problem has no solution if the first Queen is fixed at (0,0).
+
+The correct approach is to place the first Queen in the first row, try each possible column, and use backtracking to place the remaining Queens.
+
+Use this corrected main() method with the NQueens class and methods from Program 5:
+
+public static void main(String[] args) {
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Enter value of N: ");
+    N = sc.nextInt();
+
+    if (N <= 0) {
+        System.out.println("Invalid value of N");
+        sc.close();
+        return;
+    }
+
+    int board[][] = new int[N][N];
+    boolean found = false;
+
+    // Try placing first Queen in every column
+    for (int col = 0; col < N; col++) {
+
+        board[0][col] = 1;
+
+        if (solve(board, 1)) {
+            found = true;
+            break;
+        }
+
+        board[0][col] = 0;
+    }
+
+    if (found) {
+
+        System.out.println("N-Queens Solution:");
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+    } else {
+        System.out.println("Solution does not exist.");
+    }
+
+    sc.close();
+}
+
+
+
+Correct sample output for N = 4:
+Enter value of N: 4
+
+N-Queens Solution:
+0 1 0 0
+0 0 0 1
+1 0 0 0
+0 0 1 0
