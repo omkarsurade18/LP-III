@@ -1,28 +1,64 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.34;
+pragma solidity ^0.8.20;
 
-contract SimpleBank {
+// Student data management using structures, arrays, and fallback.
+contract StudentManagement {
+    // Structure to store one student's details.
+    struct Student {
+        uint256 id;
+        string name;
+        uint256 marks;
+    }
+
+    // Dynamic array of student records.
+    Student[] public students;
+
     address public owner;
-    uint256 public balance;
 
-     constructor() public 
-     {
+    constructor() {
         owner = msg.sender;
-        balance = 0;
     }
 
-    function deposit(uint256 amount) public {
-        require(msg.sender == owner, "Only the owner can deposit money");
-        balance += amount;
+    // Only the contract deployer can add or update student records.
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can perform this action");
+        _;
     }
 
-    function withdraw(uint256 amount) public {
-        require(msg.sender == owner, "Only the owner can withdraw money");
-        require(amount <= balance, "Insufficient balance");
-        balance -= amount;
+    // Add a student record to the array.
+    function addStudent(
+        uint256 _id,
+        string memory _name,
+        uint256 _marks
+    ) public onlyOwner {
+        students.push(Student(_id, _name, _marks));
     }
 
-    function getBalance() public view returns (uint256) {
-        return balance;
+    // Add bonus marks to a student using their array index.
+    function bonusMarks(uint256 index, uint256 bonus) public onlyOwner {
+        require(index < students.length, "Invalid student index");
+        students[index].marks += bonus;
     }
+
+    // Return student details using their array index.
+    function getStudent(uint256 index)
+        public
+        view
+        returns (uint256, string memory, uint256)
+    {
+        require(index < students.length, "Invalid student index");
+        Student memory student = students[index];
+        return (student.id, student.name, student.marks);
+    }
+
+    // Return the number of student records.
+    function getStudentCount() public view returns (uint256) {
+        return students.length;
+    }
+
+    // Called when Ether is sent with empty calldata.
+    receive() external payable {}
+
+    // Called when calldata does not match any function.
+    fallback() external payable {}
 }
