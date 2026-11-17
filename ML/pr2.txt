@@ -100,3 +100,68 @@ results.plot(
 plt.ylabel("Accuracy")
 plt.ylim(0, 1)
 plt.show()
+
+
+
+
+Q1. What is the aim of this practical?
+
+To classify emails as Spam or Not Spam using Machine Learning algorithms.
+
+Q2. Which type of Machine Learning is used?
+
+Supervised Machine Learning.
+
+Q3. Which type of problem is this?
+
+Classification problem because emails are classified into two categories: Spam and Not Spam.
+
+Q4. Which algorithms are used?
+1. K-Nearest Neighbors (KNN)
+2. Support Vector Machine (SVM)
+Q5. What is spam email?
+
+Spam email is an unwanted or unwanted promotional email sent in bulk.
+
+Q6. What is KNN?
+
+KNN stands for K-Nearest Neighbors. It classifies data based on the nearest neighboring data points.
+
+Q7. What is SVM?
+
+SVM stands for Support Vector Machine. It classifies data by finding the best separating boundary called a hyperplane.
+
+Q8. What is StandardScaler?
+
+StandardScaler is used to normalize features so that they have a mean of 0 and standard deviation of 1.
+
+Q9. Why do we use train_test_split?
+
+To divide the dataset into training and testing data.
+
+Q10. What does test_size=0.2 mean?
+
+80% data is used for training and 20% for testing.
+
+Q11. What is the use of stratify=y?
+
+It maintains the same proportion of classes in training and testing datasets.
+
+Q12. What is a confusion matrix?
+
+A confusion matrix is a table used to evaluate classification performance by comparing actual and predicted values.
+
+Q13. What is accuracy?
+
+Accuracy is the percentage of correctly predicted results.
+\[
+Accuracy=\frac{Correct\ Predictions}{Total\ Predictions}
+\]
+
+Q14. What is classification_report?
+
+It displays precision, recall, F1-score and support for each class.
+
+Q15. Which algorithm is better, KNN or SVM?
+
+The algorithm with higher accuracy and better precision, recall and F1-score is generally considered better.
