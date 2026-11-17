@@ -12,6 +12,10 @@ for i in range(iterations):
 
 print("Minimum point x =", round(x, 4))
 print("Minimum value y =", round(f(x), 4))
+
+
+
+
 '''1. Define the function \(f(x)=(x+3)^2\).
 2. Calculate its derivative (gradient): \(f'(x)=2(x+3)\).
 3. Set the starting point \(x=2\).
@@ -30,3 +34,68 @@ Where:
 - \(x\) = Current value
 - \(\alpha\) = Learning rate
 - \(f'(x)\) = Gradient (derivative)'''
+
+
+Q1. What is the aim of this practical?
+
+To implement the Gradient Descent algorithm to find the minimum value of a mathematical function.
+
+Q2. What is Gradient Descent?
+
+Gradient Descent is an optimization algorithm used to find the minimum value of a function by updating values in the opposite direction of the gradient.
+
+Q3. What is the function used in this practical?
+\[
+f(x)=(x+3)^2
+\]
+
+Q4. What is the minimum point of this function?
+
+The minimum point is \(x=-3\), and the minimum value is \(y=0\).
+
+Q5. What is a gradient?
+
+A gradient is the derivative of a function that indicates the direction and rate of change.
+
+Q6. What is the derivative of the given function?
+\[
+f'(x)=2(x+3)
+\]
+
+Q7. What is the learning rate?
+
+Learning rate controls how much the value of x changes in each iteration.
+
+In this program, learning rate = 0.1.
+
+Q8. What is an iteration?
+
+One complete execution of the gradient update step is called an iteration.
+
+Q9. What is the starting value of x?
+
+The starting value is x = 2.
+
+Q10. What is the Gradient Descent formula?
+
+
+
+Q11. Why do we subtract the gradient?
+
+Because we move in the opposite direction of the gradient to reach the minimum value.
+
+Q12. What happens if the learning rate is too high?
+
+The algorithm may overshoot the minimum point or fail to converge.
+
+Q13. What happens if the learning rate is too low?
+
+The algorithm takes more time to reach the minimum point.
+
+Q14. What is optimization?
+
+Optimization is the process of finding the minimum or maximum value of a function.
+
+Q15. What is the final output of this program?
+Minimum point x = -3.0
+Minimum value y = 0.0
