@@ -1,64 +1,104 @@
+
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.34;
 
-// Student data management using structures, arrays, and fallback.
-contract StudentManagement {
-    // Structure to store one student's details.
-    struct Student {
-        uint256 id;
-        string name;
-        uint256 marks;
-    }
+// Smart contract for a simple bank
+contract SimpleBank {
 
-    // Dynamic array of student records.
-    Student[] public students;
+    address public owner;   // Stores the owner's address
+    uint256 public balance; // Stores the bank balance
 
-    address public owner;
-
-    constructor() {
-        owner = msg.sender;
-    }
-
-    // Only the contract deployer can add or update student records.
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Only owner can perform this action");
-        _;
-    }
-
-    // Add a student record to the array.
-    function addStudent(
-        uint256 _id,
-        string memory _name,
-        uint256 _marks
-    ) public onlyOwner {
-        students.push(Student(_id, _name, _marks));
-    }
-
-    // Add bonus marks to a student using their array index.
-    function bonusMarks(uint256 index, uint256 bonus) public onlyOwner {
-        require(index < students.length, "Invalid student index");
-        students[index].marks += bonus;
-    }
-
-    // Return student details using their array index.
-    function getStudent(uint256 index)
-        public
-        view
-        returns (uint256, string memory, uint256)
+    // Constructor executes only once during deployment
+    constructor()
     {
-        require(index < students.length, "Invalid student index");
-        Student memory student = students[index];
-        return (student.id, student.name, student.marks);
+        owner = msg.sender; // Set deployer as owner
+        balance = 0;        // Initialize balance to zero
     }
 
-    // Return the number of student records.
-    function getStudentCount() public view returns (uint256) {
-        return students.length;
+    // Function to deposit money
+    function deposit(uint256 amount) public {
+
+        // Only owner can deposit money
+        require(msg.sender == owner, "Only the owner can deposit money");
+
+        balance += amount; // Add amount to balance
     }
 
-    // Called when Ether is sent with empty calldata.
-    receive() external payable {}
+    // Function to withdraw money
+    function withdraw(uint256 amount) public {
 
-    // Called when calldata does not match any function.
-    fallback() external payable {}
+        // Only owner can withdraw money
+        require(msg.sender == owner, "Only the owner can withdraw money");
+
+        // Check whether sufficient balance is available
+        require(amount <= balance, "Insufficient balance");
+
+        balance -= amount; // Subtract amount from balance
+    }
+
+    // Function to check current balance
+    function getBalance() public view returns (uint256) {
+
+        return balance; // Return current balance
+    }
 }
+
+
+
+
+
+
+
+The program creates a smart contract named SimpleBank.
+
+
+
+The owner variable stores the Ethereum address of the contract owner.
+
+
+
+The balance variable stores the current bank balance.
+
+
+
+The constructor executes only once when the contract is deployed.
+
+
+
+The constructor assigns the deployer's address as the owner.
+
+
+
+Initially, the bank balance is set to zero.
+
+
+
+The deposit function is used to add money to the balance.
+
+
+
+Only the owner can deposit money.
+
+
+
+The withdraw function is used to withdraw money from the balance.
+
+
+
+Only the owner can withdraw money.
+
+
+
+Before withdrawal, the program checks whether sufficient balance is available.
+
+
+
+The getBalance function displays the current balance.
+
+
+
+The view keyword ensures that the function does not modify contract data.
+
+
+
+The require statement checks conditions and stops execution if a condition is false.
