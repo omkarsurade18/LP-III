@@ -1,35 +1,59 @@
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+contract StudentData {
 
-// Bank account: Deposit Ether, withdraw Ether, and show balance.
-contract Bank {
-    // Stores the Ether balance for each wallet address.
-    mapping(address => uint256) public balances;
-
-    // Deposit Ether into the caller's account.
-    function deposit() public payable {
-        require(msg.value > 0, "Enter a valid amount");
-        balances[msg.sender] += msg.value;
+    // Structure to store student details
+    struct Student {
+        uint id;
+        string name;
+        uint marks;
     }
 
-    // Withdraw Ether from the caller's account.
-    function withdraw(uint256 amount) public {
-        require(amount > 0, "Invalid amount");
-        require(balances[msg.sender] >= amount, "Insufficient balance");
+    // Array to store multiple students
+    Student[] public students;
 
-        // Update the recorded balance before transferring Ether.
-        balances[msg.sender] -= amount;
-        payable(msg.sender).transfer(amount);
+    // Add student data
+    function addStudent(uint id, string memory name, uint marks) public {
+        students.push(Student(id, name, marks));
     }
 
-    // Show the caller's recorded account balance (in Wei).
-    function getBalance() public view returns (uint256) {
-        return balances[msg.sender];
+    // Display student data
+    function getStudent(uint index) public view returns (uint, string memory, uint) {
+        Student memory s = students[index];
+        return (s.id, s.name, s.marks);
     }
 
-    // Show the total Ether held by this contract (in Wei).
-    function getContractBalance() public view returns (uint256) {
-        return address(this).balance;
+    // Return total number of students
+    function getTotalStudents() public view returns (uint) {
+        return students.length;
     }
 }
+
+
+
+
+1. The MIT license specifies the license under which the contract is shared.
+
+2. Solidity version 0.8.20 is specified.
+
+3. A smart contract named StudentData is created.
+
+4. A structure named Student is created to store student details.
+
+5. The structure contains three fields: student ID, name, and marks.
+
+6. A public array named students is created to store multiple student records.
+
+7. The addStudent() function adds a new student's ID, name, and marks to the array.
+
+8. The getStudent() function retrieves the details of a student using their array index.
+
+9. The getTotalStudents() function returns the total number of students stored in the array.
+
+10. The contract is compiled and deployed using Remix IDE.
+
+11. After deployment, we can execute the functions to add and display student records.
+
+12. All student records are stored on the Ethereum blockchain.
