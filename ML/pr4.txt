@@ -102,3 +102,69 @@ if prediction[0] == 1:
     print("Person may have diabetes")
 else:
     print("Person may not have diabetes")
+
+
+
+
+
+Q1. What is the aim of this practical?
+
+To predict whether a person has diabetes or not using the K-Nearest Neighbors (KNN) algorithm.
+
+Q2. Which type of Machine Learning is used?
+
+Supervised Machine Learning.
+
+Q3. Which type of problem is this?
+
+Classification problem because the output is classified into two classes: diabetic (1) and non-diabetic (0).
+
+Q4. What is KNN?
+
+KNN stands for K-Nearest Neighbors. It predicts the class of new data based on the nearest neighboring data points.
+
+Q5. Which dataset is used?
+
+Diabetes dataset (diabetes.csv).
+
+Q6. What is the meaning of Outcome?
+- 0 = Person does not have diabetes.
+- 1 = Person has diabetes.
+Q7. Why do we replace zero values with NaN?
+
+Because zero values in columns like Glucose, BloodPressure and BMI may represent missing or invalid measurements.
+
+Q8. What is SimpleImputer?
+
+SimpleImputer is used to replace missing values in a dataset. In this practical, we use the median strategy.
+
+Q9. What is the use of StandardScaler?
+
+It standardizes the features so that they have a mean of 0 and standard deviation of 1.
+
+Q10. What is train_test_split?
+
+It divides the dataset into training and testing data. Here, 80% is used for training and 20% for testing.
+
+Q11. What does n_neighbors=5 mean?
+
+It means KNN considers the 5 nearest neighbors to predict the class of new data.
+
+Q12. What is a confusion matrix?
+
+It is a table used to compare actual and predicted values.
+
+Q13. What are Accuracy, Precision and Recall?
+- Accuracy: Percentage of correct predictions.
+- Precision: How many predicted positive cases are actually positive.
+- Recall: How many actual positive cases are correctly identified.
+Q14. What is Error Rate?
+
+Error Rate represents the percentage of incorrect predictions.
+\[
+Error\ Rate=1-Accuracy
+\]
+
+Q15. How do you predict diabetes for a new person?
+
+We create a new person's input data, apply imputation and scaling, and use knn.predict() to predict the result.
