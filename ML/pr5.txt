@@ -106,3 +106,81 @@ print(df.groupby('KMeans_Cluster')['SALES'].mean())
 
 print("\nAverage Sales by Hierarchical Cluster:")
 print(df.groupby('Hierarchical_Cluster')['SALES'].mean())
+
+
+
+
+
+
+
+
+Q1. What is the aim of this practical?
+
+To perform customer or sales data clustering using K-Means and Hierarchical Clustering algorithms.
+
+Q2. Which type of Machine Learning is used?
+
+Unsupervised Machine Learning because the dataset does not contain predefined output labels.
+
+Q3. What is clustering?
+
+Clustering is the process of grouping similar data points into clusters based on their similarities.
+
+Q4. Which algorithms are used?
+1. K-Means Clustering.
+2. Agglomerative (Hierarchical) Clustering.
+Q5. What is K-Means Clustering?
+
+K-Means is an unsupervised learning algorithm that divides data into K clusters based on the distance from cluster centroids.
+
+Q6. What is Hierarchical Clustering?
+
+It is an unsupervised learning algorithm that creates a hierarchy of clusters by combining or dividing data points.
+
+Q7. What is the difference between K-Means and Hierarchical Clustering?
+K-Means	Hierarchical
+Uses centroids	Uses hierarchy of clusters
+Requires K value	Can build hierarchy before choosing clusters
+Faster for large datasets	Can be computationally expensive
+Uses cluster assignment	Uses dendrogram
+
+Q8. What is StandardScaler?
+
+It standardizes features so that they have a mean of 0 and standard deviation of 1.
+
+Q9. What is the Elbow Method?
+
+The Elbow Method is used to find the optimal number of clusters by plotting WCSS against the number of clusters.
+
+Q10. What is WCSS?
+
+WCSS stands for Within-Cluster Sum of Squares. It measures the sum of squared distances between data points and their cluster centroids.
+
+Q11. What is PCA?
+
+PCA stands for Principal Component Analysis. It reduces the number of dimensions while retaining as much information as possible.
+
+Q12. What is a dendrogram?
+
+A dendrogram is a tree-like diagram that shows how clusters are merged in Hierarchical Clustering.
+
+
+
+
+
+
+
+
+
+
+Q13. What is Agglomerative Clustering?
+
+It is a bottom-up approach in which each data point starts as an individual cluster, and similar clusters are gradually merged.
+
+Q14. What is linkage='ward'?
+
+Ward linkage merges clusters in a way that minimizes the increase in within-cluster variance.
+
+Q15. Why do we use two clustering algorithms?
+
+To compare K-Means and Hierarchical Clustering results and understand how both algorithms group sales data.
