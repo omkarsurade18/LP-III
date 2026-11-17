@@ -80,3 +80,67 @@ for name, p in [('Linear Regression', p1), ('Random Forest', p2)]:
 fare = rf.predict(X_test.iloc[[0]])
 
 print("Predicted Uber Fare: $", round(fare[0], 2))
+
+
+
+Q1. What is the aim of this practical?
+
+To predict Uber ride fares using Machine Learning algorithms.
+
+Q2. Which type of Machine Learning is used?
+
+Supervised Machine Learning.
+
+Q3. Which type of problem is this?
+
+Regression problem because we predict a continuous numerical value.
+
+Q4. Which algorithms are used?
+1. Linear Regression
+2. Random Forest Regression
+Q5. What is data preprocessing?
+
+Data preprocessing is the process of cleaning and preparing raw data before training a model.
+
+Q6. What is an outlier?
+
+An outlier is a value that is significantly different from other values in a dataset.
+
+Q7. Which method is used to detect outliers?
+
+IQR (Interquartile Range) method.
+
+Q8. What is IQR?
+
+IQR is the difference between the third quartile and first quartile.
+\[
+IQR=Q3-Q1
+\]
+
+Q9. What is correlation?
+
+Correlation measures the relationship between two variables. Its value ranges from -1 to +1.
+
+Q10. What is Linear Regression?
+
+Linear Regression is a supervised learning algorithm used to predict continuous values using a linear relationship.
+
+Q11. What is Random Forest Regression?
+
+It is an ensemble learning algorithm that combines multiple decision trees to predict numerical values.
+
+Q12. What is train_test_split?
+
+It divides the dataset into training and testing data.
+
+Q13. What does test_size=0.2 mean?
+
+80% data is used for training and 20% for testing.
+
+Q14. What are MAE, RMSE and R² Score?
+- MAE: Mean Absolute Error.
+- RMSE: Root Mean Squared Error.
+- R²: Measures how well the model explains variations in the output.
+Q15. Which model is better and why?
+
+The model with a higher R² score and lower MAE and RMSE is generally considered better.
